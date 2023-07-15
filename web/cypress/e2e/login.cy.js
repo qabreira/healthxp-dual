@@ -1,11 +1,28 @@
 /// <reference types="cypress" />
 import users from '../fixtures/users.json'
 
+// IMPORTAÇÃO DA CLASSE CRIADA PARA O PADRÃO PAGE OBJECTS
+// import LoginPage from '../support/pages/LoginPage'
+
+// IMPORTAÇÃO DA CLASSE CONSTRUÍDA
+import login from '../support/pages/LoginPage'
+
 describe('login', () => {
 
     it('deve logar com sucesso', () => {
         const user = users.loginSuccess
-        cy.doLogin(user)
+
+        // CONSTRUINDO A CLASSE PARA UTILIZAR AS FUNÇÕES
+        // const login = new LoginPage()
+
+        // UTILIZANDO A FUNÇÃO DA CLASSE PARA SUBSTITUIR CUSTOM COMMANDS
+        // login.doLogin(user)
+
+        // CUSTOM COMMAND
+        // cy.doLogin(user)
+
+        // MELHORANDO A DESCRIÇÃO DA FUNÇÃO PARA APROVEITAR O CONTEXTO LOGIN
+        login.submit(user)
 
         cy.get('.logged-user').should('contain', `Olá, ${user.name}`)
             .and('be.visible')
@@ -13,23 +30,20 @@ describe('login', () => {
 
     it('não deve logar com senha incorreta', () => {
         const user = users.wrongPassword
-        cy.doLogin(user)
-
-        cy.checkAlertMessage(user.alertMessage)
+        login.submit(user)
+        login.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com usuário não cadastrado', () => {
         const user = users.unknownUser
-        cy.doLogin(user)
-
-        cy.checkAlertMessage(user.alertMessage)
+        login.submit(user)
+        login.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com email incorreto', () => {
         const user = users.wrongEmail
-        cy.doLogin(user)
-
-        cy.checkAlertMessage(user.alertMessage)
+        login.submit(user)
+        login.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com e-mail em branco', () => {
@@ -48,7 +62,7 @@ describe('login', () => {
         cy.contains('button', 'Entrar').should('be.visible')
             .click()
 
-        cy.checkAlertMessage(user.alertMessage)
+        login.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com a senha em branco', () => {
@@ -67,6 +81,6 @@ describe('login', () => {
         cy.contains('button', 'Entrar').should('be.visible')
             .click()
 
-        cy.checkAlertMessage(user.alertMessage)
+        login.checkAlertMessage(user.alertMessage)
     })
 })
