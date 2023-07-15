@@ -1,5 +1,32 @@
 {
-    "name": "Admin",
-    "email": "admin@healthxp.com",
-    "password": "xperience"
+    "loginSuccess": {
+        "email": "admin@healthxp.com",
+        "password": "xperience",
+        "name": "Admin"
+    },
+    "wrongPassword": {
+        "email": "admin@healthxp.com",
+        "password": "senha-inválida",
+        "alertMessage": "Suas credenciais são inválidas, por favor tente novamente!"
+    },
+    "unknownUser": {
+        "email": "404@unknow.com",
+        "password": "123456",
+        "alertMessage": "Suas credenciais são inválidas, por favor tente novamente!"
+    },
+    "wrongEmail": {
+        "email": "admin@healthxp.com.",
+        "password": "xperience",
+        "alertMessage": "Insira um email válido."
+    },
+    "emptyEmail": {
+        "email": "apagar",
+        "password": "xperience",
+        "alertMessage": "Os campos email e senha são obrigatórios"
+    },
+    "emptyPassword": {
+        "email": "admin@healthxp.com",
+        "password": "apagar",
+        "alertMessage": "Os campos email e senha são obrigatórios"
+    }
 }
