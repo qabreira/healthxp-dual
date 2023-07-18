@@ -15,8 +15,15 @@
         "alertMessage": "Suas credenciais são inválidas, por favor tente novamente!"
     },
     "wrongEmail": {
-        "email": "admin@healthxp.com.",
-        "password": "xperience",
+        "emails": [
+            {"email": "admin@healthxp.com.", "password": "xperience"},
+            {"email": "admin&healthxp.com", "password": "xperience"},
+            {"email": "admin.healthxp.com", "password": "xperience"},
+            {"email": "123321", "password": "xperience"},
+            {"email": "asdf", "password": "xperience"},
+            {"email": "      @healthxp.com", "password": "xperience"},
+            {"email": ".admin@healthxp.com", "password": "xperience"}
+        ],
         "alertMessage": "Insira um email válido."
     },
     "emptyEmail": {

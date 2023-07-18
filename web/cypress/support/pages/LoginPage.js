@@ -1,25 +1,57 @@
 class LoginPage {
-    submit(user) {
+    go() {
         cy.visit('/').title()
             .should('eq', 'Health eXperience | Exclusivo para treinamentos na QAx')
+    }
 
+    fillCredentials(user) {
         cy.get('input[name=email]').should('be.visible')
+            .clear()
             .type(user.email)
         cy.get('input[name=password]').should('be.visible')
+            .clear()
             .type(user.password)
+    }
 
+    skipFillEmail(user) {
+        cy.get('input[name=email]')
+            .type(user.email)
+            .clear()
+            .should('be.visible')
+        cy.get('input[name=password]').should('be.visible')
+            .type(user.password)
+    }
+
+    skipFillPassword(user) {
+        cy.get('input[name=email]').should('be.visible')
+            .type(user.email)
+        cy.get('input[name=password]')
+            .type(user.password)
+            .clear()
+            .should('be.visible')
+    }
+
+    submit() {
         cy.contains('button', 'Entrar').should('be.visible')
             .click()
+    }
+
+    doLogin(user) {
+        this.go()
+        this.fillCredentials(user)
+        this.submit()
     }
 
     checkAlertMessage(alertMessage) {
         cy.contains('#swal2-content', alertMessage)
             .should('be.visible')
     }
+
+    returnCredentials() {
+        cy.contains('button', 'Voltar').should('be.visible')
+            .click()
+    }
+
 }
 
-// EXPORTAÇÃO DA CLASSE PARA POSSIBILTAR UTILIZAÇÃO
-// export default LoginPage
-
-// EXPORTANDO A CLASSE EM UM FORMATO JÁ CONSTRUÍDO
 export default new LoginPage()
