@@ -22,7 +22,7 @@
             {"email": "123321", "password": "xperience"},
             {"email": "asdf", "password": "xperience"},
             {"email": "      @healthxp.com", "password": "xperience"},
-            {"email": ".admin@healthxp.com", "password": "xperience"}
+            {"email": ".papainoel@mail.com", "password": "xperience"}
         ],
         "alertMessage": "Insira um email válido."
     },
