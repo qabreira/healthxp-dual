@@ -29,11 +29,11 @@
     "emptyEmail": {
         "email": "apagar",
         "password": "xperience",
-        "alertMessage": "Os campos email e senha são obrigatórios"
+        "alertMessage": "Os campos email e senha são obrigatórios."
     },
     "emptyPassword": {
         "email": "admin@healthxp.com",
         "password": "apagar",
-        "alertMessage": "Os campos email e senha são obrigatórios"
+        "alertMessage": "Os campos email e senha são obrigatórios."
     }
 }

@@ -42,9 +42,14 @@ class LoginPage {
         this.submit()
     }
 
+    popUpMessage(){
+        return cy.get('#swal2-content')
+    }
+
     checkAlertMessage(alertMessage) {
-        cy.contains('#swal2-content', alertMessage)
-            .should('be.visible')
+        this.popUpMessage()
+            .should('have.text', alertMessage)
+            .and('be.visible')
     }
 
     returnCredentials() {

@@ -1,0 +1,16 @@
+{
+    "successfullyCreate": {
+        "name": "Jeremy Adams",
+        "email": "jeremy@mail.com",
+        "age": "30",
+        "weight": "80",
+        "feet_tall": "1.8"
+    },
+    "canNotCreate": {
+        "name": "",
+        "email": "",
+        "age": "15",
+        "weight": "",
+        "feet_tall": ""
+    }
+}
