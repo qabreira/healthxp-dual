@@ -1,4 +1,11 @@
+import popup from './components/Popup'
+
 class LoginPage {
+
+    constructor(){
+        this.popup = popup
+    }
+
     go() {
         cy.visit('/').title()
             .should('eq', 'Health eXperience | Exclusivo para treinamentos na QAx')
@@ -41,22 +48,6 @@ class LoginPage {
         this.fillCredentials(user)
         this.submit()
     }
-
-    popUpMessage(){
-        return cy.get('#swal2-content')
-    }
-
-    checkAlertMessage(alertMessage) {
-        this.popUpMessage()
-            .should('have.text', alertMessage)
-            .and('be.visible')
-    }
-
-    returnCredentials() {
-        cy.contains('button', 'Voltar').should('be.visible')
-            .click()
-    }
-
 }
 
 export default new LoginPage()

@@ -1,16 +1,18 @@
 {
-    "successfullyCreate": {
+    "successfullyRegister": {
         "name": "Jeremy Adams",
         "email": "jeremy@mail.com",
         "age": "30",
         "weight": "80",
-        "feet_tall": "1.8"
+        "feet_tall": "1.8",
+        "expectedMessage": "Dados cadastrados com sucesso."
     },
-    "canNotCreate": {
-        "name": "",
-        "email": "",
-        "age": "15",
-        "weight": "",
-        "feet_tall": ""
+    "duplicateEmail": {
+        "name": "Jão Predo",
+        "email": "jp@mail.com",
+        "age": "44",
+        "weight": "60",
+        "feet_tall": "1.5",
+        "expectedMessage": "O email informado já foi cadastrado!"
     }
 }

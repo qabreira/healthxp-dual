@@ -1,9 +1,5 @@
 const { defineConfig } = require("cypress");
-
-// IMPORTAÇÃO DA CLASSE POOL - POSTGRES
 const { Pool } = require('pg')
-
-// OBJETO DAS INFORMAÇÕES PARA CONEXÃO COM O BANCO
 const dbConfig = {
   host: 'babar.db.elephantsql.com',
   user: 'qrucqdqk',
@@ -16,40 +12,50 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
-
-      // IMPLEMENTAÇÃO DE UM OUVINTE
-      // SEMPRE QUE INVOCADA UMA TASK, O CYPRESS VERIFICA SE ELA EXISTE
       on('task', {
 
-        // FUNÇÃO PARA A DELEÇÃO DE UM ALUNO PELO EMAIL
         deleteStudent(studentEmail) {
-
-          // CRIANDO UMA PROMESSA PARA O CYPRESS ENTENDER QUE:
-          // SÓ PODE SEGUIR PARA O PRÓXIMO COMANDO QUANDO SE A FUNÇÃO FOR CUMPRIDA OU REJEITADA
           return new Promise(function (resolve, reject) {
-            // APLICANDO A CONEXÃO COM O BANCO ATRAVÉS DE POOL + OBJETO COM OS DADOS
-            const pool = new Pool(dbConfig)
 
-            // QUERY SQL PARA A REMOÇÃO DO ALUNO PELO EMAIL INFORMADO
+            const pool = new Pool(dbConfig)
             const query = 'DELETE FROM students WHERE email = $1;'
 
-            // EXECUTAMOS A QUERY PASSANDO O PARÂMeTRO EM UMA LISTA PARA SUBSTITUIR O $1 DA CONSTANTE
-            pool.query(query, [studentEmail], function(error, result){
-              // A FUNÇÃO DE CALLBACK VERIFICA O RESULTADO PARA IDENTIFICAR SE:
-
-              if(error) {
-                // OCORREU UM ERRO, DEVE REJEITAR A PROMESSA
-                reject({error: error})                
+            pool.query(query, [studentEmail], function (error, result) {
+              if (error) {
+                reject({ error: error })
               }
-              // DEU TUDO CERTO, RESOLVE A PROMESSA
-              resolve({success: result})
+              resolve({ success: result })
 
-              // FECHA A CONEXÃO COM O BANCO
+              pool.end()
+            })
+          })
+        },
+
+        resetStudent(student) {
+          return new Promise(function (resolve, reject) {
+
+            const pool = new Pool(dbConfig)
+            const query = `
+              WITH add AS (
+                INSERT INTO students (name, email, age, weight, feet_tall)
+                VALUES ($1, $2, $3, $4, $5)
+              )
+              DELETE FROM students WHERE email = $2;
+            `
+            const values = [
+              student.name, student.email, student.age, student.weight, student.feet_tall
+            ]
+
+            pool.query(query, values, function (error, result) {
+              if (error) {
+                reject({ error: error })
+              }
+              resolve({ success: result })
+
               pool.end()
             })
           })
         }
-
       })
     },
     env: {

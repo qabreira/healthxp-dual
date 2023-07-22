@@ -1,26 +1,29 @@
 /// <reference types="cypress" />
 import users from '../fixtures/users.json'
-import login from '../support/pages/LoginPage'
-import students from '../support/pages/StudentsPage'
+import loginPage from '../support/pages/LoginPage'
+import studentsPage from '../support/pages/StudentsPage'
 
 describe('login', () => {
 
     it('deve logar com sucesso', () => {
         const user = users.loginSuccess
-        login.doLogin(user)
-        students.loggedInUser(user.name)
+
+        loginPage.doLogin(user)
+        studentsPage.navbar.loggedInUser(user.name)
     })
 
     it('não deve logar com senha incorreta', () => {
         const user = users.wrongPassword
-        login.doLogin(user)
-        login.checkAlertMessage(user.alertMessage)
+
+        loginPage.doLogin(user)
+        loginPage.popup.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com usuário não cadastrado', () => {
         const user = users.unknownUser
-        login.doLogin(user)
-        login.checkAlertMessage(user.alertMessage)
+
+        loginPage.doLogin(user)
+        loginPage.popup.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com email incorreto', () => {
@@ -29,35 +32,37 @@ describe('login', () => {
         let outputMessages = []
         let expectedMessages = []
 
-        login.go()
+        loginPage.go()
         emails.forEach((i) => {
-            login.fillCredentials(i)
-            login.submit()
-            login.popUpMessage()
+            loginPage.fillCredentials(i)
+            loginPage.submit()
+            loginPage.popup.content()
                 .invoke('text')
                 .then((text) => {
                     cy.log(text)
                     outputMessages.push(text)
                     expectedMessages.push(alertMessage)
                 })
-            login.returnCredentials()
+            loginPage.popup.returnButton()
         })
         cy.wrap(outputMessages).should('deep.equal', expectedMessages)
     })
 
     it('não deve logar com e-mail em branco', () => {
         const user = users.emptyEmail
-        login.go()
-        login.skipFillEmail(user)
-        login.submit()
-        login.checkAlertMessage(user.alertMessage)
+
+        loginPage.go()
+        loginPage.skipFillEmail(user)
+        loginPage.submit()
+        loginPage.popup.checkAlertMessage(user.alertMessage)
     })
 
     it('não deve logar com a senha em branco', () => {
         const user = users.emptyPassword
-        login.go()
-        login.skipFillPassword(user)
-        login.submit()
-        login.checkAlertMessage(user.alertMessage)
+        
+        loginPage.go()
+        loginPage.skipFillPassword(user)
+        loginPage.submit()
+        loginPage.popup.checkAlertMessage(user.alertMessage)
     })
 })
