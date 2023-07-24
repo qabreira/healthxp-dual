@@ -5,7 +5,7 @@
         "age": "30",
         "weight": "80",
         "feet_tall": "1.8",
-        "expectedMessage": "Dados cadastrados com sucesso."
+        "textMessage": "Dados cadastrados com sucesso."
     },
     "duplicateEmail": {
         "name": "Jão Predo",
@@ -13,6 +13,44 @@
         "age": "44",
         "weight": "60",
         "feet_tall": "1.5",
-        "expectedMessage": "O email informado já foi cadastrado!"
-    }
+        "textMessage": "O email informado já foi cadastrado!"
+    },
+    "removeRegister": {
+        "name": "Valdir Sem Matrícula",
+        "email": "vp@mail.com",
+        "age": "52",
+        "weight": "100",
+        "feet_tall": "1.85",
+        "textMessage": "Exclusão realizada com sucesso."
+    },
+    "agesAllowed": [
+        {
+            "name": "Carlota 16 Anos",
+            "email": "carlota16@mail.com",
+            "age": "16",
+            "weight": "68",
+            "feet_tall": "1.7"
+        },
+        {
+            "name": "Carlota 17 Anos",
+            "email": "carlota17@mail.com",
+            "age": "16",
+            "weight": "68",
+            "feet_tall": "1.7"
+        },
+        {
+            "name": "Carlota 89 Anos",
+            "email": "carlota89@mail.com",
+            "age": "16",
+            "weight": "68",
+            "feet_tall": "1.7"
+        },
+        {
+            "name": "Carlota 90 Anos",
+            "email": "carlota90@mail.com",
+            "age": "90",
+            "weight": "68",
+            "feet_tall": "1.7"
+        }
+    ]
 }

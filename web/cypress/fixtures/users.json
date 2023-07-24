@@ -7,12 +7,12 @@
     "wrongPassword": {
         "email": "admin@healthxp.com",
         "password": "senha-inválida",
-        "alertMessage": "Suas credenciais são inválidas, por favor tente novamente!"
+        "textMessage": "Suas credenciais são inválidas, por favor tente novamente!"
     },
     "unknownUser": {
         "email": "404@unknow.com",
         "password": "123456",
-        "alertMessage": "Suas credenciais são inválidas, por favor tente novamente!"
+        "textMessage": "Suas credenciais são inválidas, por favor tente novamente!"
     },
     "wrongEmail": {
         "emails": [
@@ -24,16 +24,16 @@
             {"email": "      @healthxp.com", "password": "xperience"},
             {"email": ".papainoel@mail.com", "password": "xperience"}
         ],
-        "alertMessage": "Insira um email válido."
+        "textMessage": "Insira um email válido."
     },
     "emptyEmail": {
         "email": "apagar",
         "password": "xperience",
-        "alertMessage": "Os campos email e senha são obrigatórios."
+        "textMessage": "Os campos email e senha são obrigatórios."
     },
     "emptyPassword": {
         "email": "admin@healthxp.com",
         "password": "apagar",
-        "alertMessage": "Os campos email e senha são obrigatórios."
+        "textMessage": "Os campos email e senha são obrigatórios."
     }
 }

@@ -3,14 +3,19 @@ class Popup {
         return cy.get('#swal2-content')
     }
 
-    checkAlertMessage(alertMessage) {
+    checkMessage(textMessage) {
         this.content()
-            .should('have.text', alertMessage)
+            .should('have.text', textMessage)
             .and('be.visible')
     }
 
     returnButton() {
-        cy.contains('button', 'Voltar').should('be.visible')
+        cy.contains('button.swal2-cancel', 'Voltar').should('be.visible')
+            .click()
+    }
+    confirmButton(text) {
+        cy.contains('button.swal2-confirm', text)
+            .should('be.visible')
             .click()
     }
 }

@@ -16,19 +16,19 @@ describe('login', () => {
         const user = users.wrongPassword
 
         loginPage.doLogin(user)
-        loginPage.popup.checkAlertMessage(user.alertMessage)
+        loginPage.popup.checkMessage(user.textMessage)
     })
 
     it('não deve logar com usuário não cadastrado', () => {
         const user = users.unknownUser
 
         loginPage.doLogin(user)
-        loginPage.popup.checkAlertMessage(user.alertMessage)
+        loginPage.popup.checkMessage(user.textMessage)
     })
 
     it('não deve logar com email incorreto', () => {
         const emails = users.wrongEmail.emails
-        const alertMessage = users.wrongEmail.alertMessage
+        const textMessage = users.wrongEmail.textMessage
         let outputMessages = []
         let expectedMessages = []
 
@@ -41,7 +41,7 @@ describe('login', () => {
                 .then((text) => {
                     cy.log(text)
                     outputMessages.push(text)
-                    expectedMessages.push(alertMessage)
+                    expectedMessages.push(textMessage)
                 })
             loginPage.popup.returnButton()
         })
@@ -54,15 +54,15 @@ describe('login', () => {
         loginPage.go()
         loginPage.skipFillEmail(user)
         loginPage.submit()
-        loginPage.popup.checkAlertMessage(user.alertMessage)
+        loginPage.popup.checkMessage(user.textMessage)
     })
 
     it('não deve logar com a senha em branco', () => {
         const user = users.emptyPassword
-        
+
         loginPage.go()
         loginPage.skipFillPassword(user)
         loginPage.submit()
-        loginPage.popup.checkAlertMessage(user.alertMessage)
+        loginPage.popup.checkMessage(user.textMessage)
     })
 })
