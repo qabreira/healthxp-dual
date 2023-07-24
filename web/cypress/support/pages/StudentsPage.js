@@ -53,11 +53,40 @@ class StudentsPage {
         this.submitRegister()
     }
 
+    submitWeight(weight) {
+        cy.get('input#weight').clear().type(weight)
+            .should('have.value', weight)
+        this.submitRegister()
+    }
+
+    submitFeetTall(feetTall) {
+        cy.get('input#feet_tall').clear().type(feetTall)
+            .should('have.value', feetTall)
+        this.submitRegister()
+    }
+
     checkAgeNotAllowed(text) {
-        cy.contains(text)
-            .should('be.visible')
+        cy.get('input#age')
             .parent()
-            .find('input#age')
+            .find('span')
+            .should('have.text', text)
+            .and('be.visible')
+    }
+
+    checkFeetTallIncorrect() {
+        cy.get('input#feet_tall')
+            .parent()
+            .find('span')
+            .should('be.visible')
+            .and('not.be.undefined')
+    }
+
+    checkWeightIncorrect() {
+        cy.get('input#weight')
+            .parent()
+            .find('span')
+            .should('be.visible')
+            .and('not.be.undefined')
 
     }
 }

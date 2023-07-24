@@ -99,4 +99,59 @@ describe('alunos', () => {
             studentsPage.popup.confirmButton('OK')
         })
     })
+
+    it('não permite cadastrar aluno com peso menor ou igual a zero', () => {
+        const student = {
+            name: 'Aluno Peso Incorreto',
+            email: 'sempeso@mail.com',
+            age: '30',
+            weight: '0',
+            feet_tall: '1.7',
+        }
+        const incorrectWeight = [
+            { value: '0', textMessage: '' },
+            { value: '-0,1', textMessage: '' },
+            // { value: '100000000', textMessage: 'Dados atualizados com sucesso.' },
+            // { value: '99999999', textMessage: 'Ocorreu um erro na atualização dos dados!' }
+        ]
+
+        cy.task('deleteStudent', student.email)
+        cy.doAdminLogin()
+        studentsPage.goToRegister()
+
+        studentsPage.fillFormRegister(student)
+
+        incorrectWeight.forEach((w) => {
+            studentsPage.submitWeight(w.value)
+            studentsPage.checkWeightIncorrect(w.textMessage)
+        })
+
+    })
+
+    it('não permite cadastrar aluno com altura menor ou igual a zero', () => {
+        const student = {
+            name: 'Aluno Altura Incorreta',
+            email: 'semaltura@mail.com',
+            age: '62',
+            weight: '100',
+            feet_tall: '0',
+        }
+        const incorrectFeetTall = [
+            { value: '0', textMessage: '' },
+            { value: '-0,1', textMessage: '' },
+            // { value: '100000000', textMessage: 'Dados atualizados com sucesso.' },
+            // { value: '99999999', textMessage: 'Ocorreu um erro na atualização dos dados!' }
+        ]
+        cy.task('deleteStudent', student.email)
+        cy.doAdminLogin()
+        studentsPage.goToRegister()
+
+        studentsPage.fillFormRegister(student)
+
+        incorrectFeetTall.forEach((ft) => {
+            studentsPage.submitFeetTall(ft.value)
+            studentsPage.checkFeetTallIncorrect()
+        })
+
+    })
 })
