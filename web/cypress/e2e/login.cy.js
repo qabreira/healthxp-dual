@@ -16,19 +16,18 @@ describe('login', () => {
         const user = users.wrongPassword
 
         loginPage.doLogin(user)
-        loginPage.popup.checkMessage(user.textMessage)
+        loginPage.popup.checkMessage('Suas credenciais são inválidas, por favor tente novamente!')
     })
 
     it('não deve logar com usuário não cadastrado', () => {
         const user = users.unknownUser
 
         loginPage.doLogin(user)
-        loginPage.popup.checkMessage(user.textMessage)
+        loginPage.popup.checkMessage('Suas credenciais são inválidas, por favor tente novamente!')
     })
 
     it('não deve logar com email incorreto', () => {
         const emails = users.wrongEmail.emails
-        const textMessage = users.wrongEmail.textMessage
         let outputMessages = []
         let expectedMessages = []
 
@@ -41,7 +40,7 @@ describe('login', () => {
                 .then((text) => {
                     cy.log(text)
                     outputMessages.push(text)
-                    expectedMessages.push(textMessage)
+                    expectedMessages.push('Insira um email válido.')
                 })
             loginPage.popup.returnButton()
         })
@@ -52,17 +51,17 @@ describe('login', () => {
         const user = users.emptyEmail
 
         loginPage.go()
-        loginPage.skipFillEmail(user)
+        loginPage.fillCredentials(user)
         loginPage.submit()
-        loginPage.popup.checkMessage(user.textMessage)
+        loginPage.popup.checkMessage('Os campos email e senha são obrigatórios.')
     })
 
     it('não deve logar com a senha em branco', () => {
         const user = users.emptyPassword
 
         loginPage.go()
-        loginPage.skipFillPassword(user)
+        loginPage.fillCredentials(user)
         loginPage.submit()
-        loginPage.popup.checkMessage(user.textMessage)
+        loginPage.popup.checkMessage('Os campos email e senha são obrigatórios.')
     })
 })

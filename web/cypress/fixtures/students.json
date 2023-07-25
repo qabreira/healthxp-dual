@@ -23,6 +23,22 @@
         "feet_tall": "1.85",
         "textMessage": "Exclusão realizada com sucesso."
     },
+    "agesNotAllowed": [
+        {
+            "name": "Carlota 15 Anos",
+            "email": "carlota15@mail.com",
+            "age": "15",
+            "weight": "69",
+            "feet_tall": "1.8"
+        },
+        {
+            "name": "Carlota 91 Anos",
+            "email": "carlota91@mail.com",
+            "age": "91",
+            "weight": "68",
+            "feet_tall": "1.7"
+        }
+    ],
     "agesAllowed": [
         {
             "name": "Carlota 16 Anos",
@@ -34,14 +50,14 @@
         {
             "name": "Carlota 17 Anos",
             "email": "carlota17@mail.com",
-            "age": "16",
+            "age": "17",
             "weight": "68",
             "feet_tall": "1.7"
         },
         {
             "name": "Carlota 89 Anos",
             "email": "carlota89@mail.com",
-            "age": "16",
+            "age": "89",
             "weight": "68",
             "feet_tall": "1.7"
         },
@@ -51,6 +67,38 @@
             "age": "90",
             "weight": "68",
             "feet_tall": "1.7"
+        }
+    ],
+    "weightNotAllowed": [
+        {
+            "name": "Student Invalid Weight",
+            "email": "weight0@mail.com",
+            "age": "15",
+            "weight": "0",
+            "feet_tall": "1.8"
+        },
+        {
+            "name": "Student Invalid Weight",
+            "email": "weight-0@mail.com",
+            "age": "91",
+            "weight": "-0,1",
+            "feet_tall": "1.7"
+        }
+    ],
+    "feetTallNotAllowed": [
+        {
+            "name": "Student Invalid Weight",
+            "email": "weight0@mail.com",
+            "age": "15",
+            "weight": "55",
+            "feet_tall": "0"
+        },
+        {
+            "name": "Student Invalid Weight",
+            "email": "weight-0@mail.com",
+            "age": "91",
+            "weight": "69",
+            "feet_tall": "-0,1"
         }
     ]
 }

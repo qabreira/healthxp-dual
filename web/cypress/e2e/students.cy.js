@@ -57,27 +57,24 @@ describe('alunos', () => {
     })
 
     it('não permitir cadastro de alunos com idade inferior a 16 ou superior a 90 anos', () => {
-        const student = {
-            name: 'Carlota Corona',
-            email: 'carlota@mail.com',
-            age: '0',
-            weight: '68',
-            feet_tall: '1.7',
-        }
-        const agesNotAllowed = [
-            { value: '15', textMessage: 'A idade mínima para treinar é 16 anos!' },
-            { value: '91', textMessage: 'A idade máxima para treinar é 90 anos!' }
+        const agesNotAllowed = students.agesNotAllowed
+        const alert = [
+            { message: 'A idade mínima para treinar é 16 anos!' },
+            { message: 'A idade máxima para treinar é 90 anos!' }
         ]
 
-        cy.task('deleteStudent', student.email)
+        agesNotAllowed.forEach((student) => {
+            cy.task('deleteStudent', student.email)
+        })
+
         cy.doAdminLogin()
         studentsPage.goToRegister()
 
-        studentsPage.fillFormRegister(student)
+        agesNotAllowed.forEach((student, i) => {
+            studentsPage.fillFormRegister(student)
+            studentsPage.submitRegister()
 
-        agesNotAllowed.forEach((age) => {
-            studentsPage.submitAge(age.value)
-            studentsPage.checkAgeNotAllowed(age.textMessage)
+            studentsPage.alertField('Idade', alert[i].message)
         })
     })
 
@@ -101,56 +98,38 @@ describe('alunos', () => {
     })
 
     it('não permite cadastrar aluno com peso menor ou igual a zero', () => {
-        const student = {
-            name: 'Aluno Peso Incorreto',
-            email: 'sempeso@mail.com',
-            age: '30',
-            weight: '0',
-            feet_tall: '1.7',
-        }
-        const incorrectWeight = [
-            { value: '0', textMessage: '' },
-            { value: '-0,1', textMessage: '' },
-            // { value: '100000000', textMessage: 'Dados atualizados com sucesso.' },
-            // { value: '99999999', textMessage: 'Ocorreu um erro na atualização dos dados!' }
-        ]
+        const weightNotAllowed = students.weightNotAllowed
 
-        cy.task('deleteStudent', student.email)
+        weightNotAllowed.forEach((student) => {
+            cy.task('deleteStudent', student.email)
+        })
+
         cy.doAdminLogin()
         studentsPage.goToRegister()
 
-        studentsPage.fillFormRegister(student)
+        weightNotAllowed.forEach((student) => {
+            studentsPage.fillFormRegister(student)
+            studentsPage.submitRegister()
 
-        incorrectWeight.forEach((w) => {
-            studentsPage.submitWeight(w.value)
-            studentsPage.checkWeightIncorrect(w.textMessage)
+            studentsPage.alertField('Peso (em kg)', 'Peso deve ser maior que 0!')
         })
-
     })
 
     it('não permite cadastrar aluno com altura menor ou igual a zero', () => {
-        const student = {
-            name: 'Aluno Altura Incorreta',
-            email: 'semaltura@mail.com',
-            age: '62',
-            weight: '100',
-            feet_tall: '0',
-        }
-        const incorrectFeetTall = [
-            { value: '0', textMessage: '' },
-            { value: '-0,1', textMessage: '' },
-            // { value: '100000000', textMessage: 'Dados atualizados com sucesso.' },
-            // { value: '99999999', textMessage: 'Ocorreu um erro na atualização dos dados!' }
-        ]
-        cy.task('deleteStudent', student.email)
+        const feetTallNotAllowed = students.feetTallNotAllowed
+
+        feetTallNotAllowed.forEach((student) => {
+            cy.task('deleteStudent', student.email)
+        })
+
         cy.doAdminLogin()
         studentsPage.goToRegister()
 
-        studentsPage.fillFormRegister(student)
+        feetTallNotAllowed.forEach((student) => {
+            studentsPage.fillFormRegister(student)
+            studentsPage.submitRegister()
 
-        incorrectFeetTall.forEach((ft) => {
-            studentsPage.submitFeetTall(ft.value)
-            studentsPage.checkFeetTallIncorrect()
+            studentsPage.alertField('Altura', 'Altura deve ser maior que 0!')
         })
 
     })

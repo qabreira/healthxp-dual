@@ -27,13 +27,13 @@
         "textMessage": "Insira um email válido."
     },
     "emptyEmail": {
-        "email": "apagar",
+        "email": "",
         "password": "xperience",
         "textMessage": "Os campos email e senha são obrigatórios."
     },
     "emptyPassword": {
         "email": "admin@healthxp.com",
-        "password": "apagar",
+        "password": "",
         "textMessage": "Os campos email e senha são obrigatórios."
     }
 }

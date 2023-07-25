@@ -2,7 +2,7 @@ import popup from './components/Popup'
 
 class LoginPage {
 
-    constructor(){
+    constructor() {
         this.popup = popup
     }
 
@@ -12,30 +12,14 @@ class LoginPage {
     }
 
     fillCredentials(user) {
-        cy.get('input[name=email]').should('be.visible')
-            .clear()
-            .type(user.email)
-        cy.get('input[name=password]').should('be.visible')
-            .clear()
-            .type(user.password)
-    }
+        cy.get('input[name=email]').should('be.visible').clear({ force: true })
+            .as('email')
 
-    skipFillEmail(user) {
-        cy.get('input[name=email]')
-            .type(user.email)
-            .clear()
-            .should('be.visible')
-        cy.get('input[name=password]').should('be.visible')
-            .type(user.password)
-    }
+        cy.get('input[name=password]').should('be.visible').clear({ force: true })
+            .as('password')
 
-    skipFillPassword(user) {
-        cy.get('input[name=email]').should('be.visible')
-            .type(user.email)
-        cy.get('input[name=password]')
-            .type(user.password)
-            .clear()
-            .should('be.visible')
+        user.email ? cy.get('@email').type(user.email) : cy.log('empty email')
+        user.password ? cy.get('@password').type(user.password) : cy.log('empty pass')
     }
 
     submit() {

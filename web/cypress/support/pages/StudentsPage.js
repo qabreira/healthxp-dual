@@ -14,11 +14,22 @@ class StudentsPage {
     }
 
     fillFormRegister(student) {
-        cy.get('input#name', { timeout: 10000 }).type(student.name)
-        cy.get('input#email').type(student.email)
-        cy.get('input#age').type(student.age)
-        cy.get('input#weight').type(student.weight)
-        cy.get('input#feet_tall').type(student.feet_tall)
+        cy.get('input#name', { timeout: 10000 }).should('be.visible').clear()
+            .as('name')
+        cy.get('input#email').should('be.visible').clear()
+            .as('email')
+        cy.get('input#age').should('be.visible').clear()
+            .as('age')
+        cy.get('input#weight').should('be.visible').clear()
+            .as('weight')
+        cy.get('input#feet_tall').should('be.visible').clear()
+            .as('feet_tall')
+
+        cy.get('@name').type(student.name)
+        cy.get('@email').type(student.email)
+        cy.get('@age').type(student.age)
+        cy.get('@weight').type(student.weight)
+        cy.get('@feet_tall').type(student.feet_tall)
     }
 
     submitRegister() {
@@ -47,47 +58,12 @@ class StudentsPage {
             .should('be.visible')
     }
 
-    submitAge(age) {
-        cy.get('input#age').clear().type(age)
-            .should('have.value', age)
-        this.submitRegister()
-    }
-
-    submitWeight(weight) {
-        cy.get('input#weight').clear().type(weight)
-            .should('have.value', weight)
-        this.submitRegister()
-    }
-
-    submitFeetTall(feetTall) {
-        cy.get('input#feet_tall').clear().type(feetTall)
-            .should('have.value', feetTall)
-        this.submitRegister()
-    }
-
-    checkAgeNotAllowed(text) {
-        cy.get('input#age')
+    alertField(field, text) {
+        cy.contains('label', field).should('be.visible')
             .parent()
             .find('span')
             .should('have.text', text)
             .and('be.visible')
-    }
-
-    checkFeetTallIncorrect() {
-        cy.get('input#feet_tall')
-            .parent()
-            .find('span')
-            .should('be.visible')
-            .and('not.be.undefined')
-    }
-
-    checkWeightIncorrect() {
-        cy.get('input#weight')
-            .parent()
-            .find('span')
-            .should('be.visible')
-            .and('not.be.undefined')
-
     }
 }
 export default new StudentsPage()
