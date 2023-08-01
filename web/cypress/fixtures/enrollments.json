@@ -1,0 +1,12 @@
+{
+    "create": {
+        "student": {
+            "name": "Crocodilo Louco",
+            "email": "crocko@mail.com",
+            "age": "62",
+            "weight": "80",
+            "feet_tall": "1.8"
+        },
+        "plan": "Plano Health"
+    }
+}
