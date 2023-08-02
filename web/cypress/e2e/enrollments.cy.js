@@ -20,7 +20,43 @@ describe('matrículas', () => {
         enrollmentsPage.popup.checkMessage('Matrícula cadastrada com sucesso.')
     })
 
-    // it('não deve duplicar matrículas', () => {
+    it.only('não deve duplicar matrículas', () => {
+        const dataTest = enrollments.duplicate
 
-    // })
+        cy.task('resetStudent', dataTest.student)
+
+        // EFETUANDO UMA MATRÍCULA VIA API
+        cy.task('selectStudentId', dataTest.student.email)
+            .then(result => {
+                // FAZER O LOGIN PARA OBTER O TOKEN
+                cy.request({
+                    url: `${Cypress.env('api')}/sessions`,
+                    method: 'POST',
+                    body: {
+                        email: 'admin@healthxp.com',
+                        password: 'xperience'
+                    }
+                }).then(response => {
+
+                    // DEFININDO O CORPO DA REQUISIÇÃO COM AS INFORMAÇÕES NECESSÁRIAS
+                    const payload = {
+                        student_id: result.success.rows[0].id,
+                        plan_id: dataTest.plan.id,
+                        credit_card: '4242'
+                    }
+
+                    // CONSTRUINDO A REQUISIÇÃO QUE CADASTRA A MATRÍCULA
+                    cy.request({
+                        url: `${Cypress.env('api')}/enrollments`,
+                        method: 'POST',
+                        body: payload,
+                        headers: {
+                            Authorization: `Bearer ${response.body.token}`
+                        }
+                    }).then(response => {
+                        expect(response.status).to.eq(201)
+                    })
+                })
+            })
+    })
 })

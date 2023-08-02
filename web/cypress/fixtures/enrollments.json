@@ -8,5 +8,18 @@
             "feet_tall": "1.8"
         },
         "plan": "Plano Health"
+    },
+    "duplicate": {
+        "student": {
+            "name": "Jacaré Louco",
+            "email": "jaca@mail.com",
+            "age": "62",
+            "weight": "80",
+            "feet_tall": "1.8"
+        },
+        "plan": {
+            "id": 1,
+            "name": "Plano Health"
+        }
     }
 }

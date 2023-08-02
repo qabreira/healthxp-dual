@@ -14,6 +14,23 @@ module.exports = defineConfig({
       // implement node event listeners here
       on('task', {
 
+        selectStudentId(studentEmail) {
+          return new Promise(function (resolve, reject) {
+
+            const pool = new Pool(dbConfig)
+            const query = 'SELECT id FROM students WHERE email = $1;'
+
+            pool.query(query, [studentEmail], function (error, result) {
+              if (error) {
+                reject({ error: error })
+              }
+              resolve({ success: result })
+
+              pool.end()
+            })
+          })
+        },
+
         deleteStudent(studentEmail) {
           return new Promise(function (resolve, reject) {
 
@@ -59,7 +76,8 @@ module.exports = defineConfig({
       })
     },
     env: {
-      url: 'http://localhost:3000'
+      url: 'http://localhost:3000',
+      api: 'http://localhost:3333'
     },
     baseUrl: 'http://localhost:3000'
   },
