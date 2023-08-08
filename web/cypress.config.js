@@ -49,7 +49,7 @@ module.exports = defineConfig({
         },
 
         resetStudent(student) {
-          return new Promise(function (resolve, reject) {
+          return new Promise(async function (resolve, reject) {
 
             const pool = new Pool(dbConfig)
             const query = `

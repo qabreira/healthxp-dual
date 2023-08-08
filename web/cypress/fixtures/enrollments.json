@@ -7,7 +7,10 @@
             "weight": "80",
             "feet_tall": "1.8"
         },
-        "plan": "Plano Health"
+        "plan": {
+            "id": 1,
+            "name": "Plano Health"
+        }
     },
     "duplicate": {
         "student": {

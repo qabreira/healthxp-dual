@@ -13,50 +13,27 @@ describe('matrículas', () => {
         enrollmentsPage.goToRegister()
 
         enrollmentsPage.selectItem('student', dataTest.student.name)
-        enrollmentsPage.selectItem('plan', dataTest.plan)
+        enrollmentsPage.selectItem('plan', dataTest.plan.name)
         enrollmentsPage.fillCard(dataTest.student.name)
         enrollmentsPage.submitForm()
 
         enrollmentsPage.popup.checkMessage('Matrícula cadastrada com sucesso.')
     })
 
-    it.only('não deve duplicar matrículas', () => {
+    it('não deve duplicar matrículas', () => {
         const dataTest = enrollments.duplicate
-
         cy.task('resetStudent', dataTest.student)
+        cy.createEnroll(dataTest)
 
-        // EFETUANDO UMA MATRÍCULA VIA API
-        cy.task('selectStudentId', dataTest.student.email)
-            .then(result => {
-                // FAZER O LOGIN PARA OBTER O TOKEN
-                cy.request({
-                    url: `${Cypress.env('api')}/sessions`,
-                    method: 'POST',
-                    body: {
-                        email: 'admin@healthxp.com',
-                        password: 'xperience'
-                    }
-                }).then(response => {
+        cy.doAdminLogin()
+        enrollmentsPage.navbar.goToEnroll()
+        enrollmentsPage.goToRegister()
 
-                    // DEFININDO O CORPO DA REQUISIÇÃO COM AS INFORMAÇÕES NECESSÁRIAS
-                    const payload = {
-                        student_id: result.success.rows[0].id,
-                        plan_id: dataTest.plan.id,
-                        credit_card: '4242'
-                    }
+        enrollmentsPage.selectItem('student', dataTest.student.name)
+        enrollmentsPage.selectItem('plan', dataTest.plan.name)
+        enrollmentsPage.fillCard(dataTest.student.name)
+        enrollmentsPage.submitForm()
 
-                    // CONSTRUINDO A REQUISIÇÃO QUE CADASTRA A MATRÍCULA
-                    cy.request({
-                        url: `${Cypress.env('api')}/enrollments`,
-                        method: 'POST',
-                        body: payload,
-                        headers: {
-                            Authorization: `Bearer ${response.body.token}`
-                        }
-                    }).then(response => {
-                        expect(response.status).to.eq(201)
-                    })
-                })
-            })
+        enrollmentsPage.popup.checkMessage('O aluno já possui matrícula cadastrada!')
     })
 })
