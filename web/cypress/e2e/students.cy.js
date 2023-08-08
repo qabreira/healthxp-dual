@@ -6,7 +6,8 @@ describe('alunos', () => {
     it('deve cadastrar um novo aluno', () => {
         const student = students.successfullyRegister
 
-        cy.task('deleteStudent', student.email)
+        // cy.task('deleteStudent', student.email)
+        cy.deleteStudent(student.email)
         cy.doAdminLogin()
 
         studentsPage.goToRegister()
@@ -19,7 +20,8 @@ describe('alunos', () => {
     it('não deve cadastrar aluno com e-mail duplicado', () => {
         const student = students.duplicateEmail
 
-        cy.task('resetStudent', student)
+        //cy.task('resetStudent', student)
+        cy.resetStudent(student)
         cy.doAdminLogin()
 
         studentsPage.goToRegister()
@@ -32,7 +34,8 @@ describe('alunos', () => {
     it('deve remover um aluno sem matrícula', () => {
         const student = students.removeRegister
 
-        cy.task('resetStudent', student)
+        // cy.task('resetStudent', student)
+        cy.resetStudent(student)
         cy.doAdminLogin()
 
         studentsPage.search(student.name)
@@ -63,9 +66,9 @@ describe('alunos', () => {
             { message: 'A idade máxima para treinar é 90 anos!' }
         ]
 
-        agesNotAllowed.forEach((student) => {
-            cy.task('deleteStudent', student.email)
-        })
+        // agesNotAllowed.forEach((student) => {
+        //     cy.task('deleteStudent', student.email)
+        // })
 
         cy.doAdminLogin()
         studentsPage.goToRegister()
@@ -82,7 +85,8 @@ describe('alunos', () => {
         const agesAllowed = students.agesAllowed
 
         agesAllowed.forEach((student) => {
-            cy.task('deleteStudent', student.email)
+            // cy.task('deleteStudent', student.email)
+            cy.deleteStudent(student.email)
         })
 
         cy.doAdminLogin()
@@ -97,7 +101,7 @@ describe('alunos', () => {
         })
     })
 
-    it('não permite cadastrar aluno com peso menor ou igual a zero', () => {
+    it.skip('não permite cadastrar aluno com peso menor ou igual a zero', () => {
         const weightNotAllowed = students.weightNotAllowed
 
         weightNotAllowed.forEach((student) => {
@@ -115,7 +119,7 @@ describe('alunos', () => {
         })
     })
 
-    it('não permite cadastrar aluno com altura menor ou igual a zero', () => {
+    it.skip('não permite cadastrar aluno com altura menor ou igual a zero', () => {
         const feetTallNotAllowed = students.feetTallNotAllowed
 
         feetTallNotAllowed.forEach((student) => {

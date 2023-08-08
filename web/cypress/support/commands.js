@@ -38,3 +38,22 @@ Cypress.Commands.add('createEnroll', (dataTest) => {
             })
         })
 })
+
+Cypress.Commands.add('resetStudent', (student) => {
+    cy.request({
+        url: `${Cypress.env('helper')}/students`,
+        method: 'POST',
+        body: student
+    }).then(response => {
+        expect(response.status).to.eq(201)
+    })
+})
+
+Cypress.Commands.add('deleteStudent', (studentEmail) => {
+    cy.request({
+        url: `${Cypress.env('helper')}/students/${studentEmail}`,
+        method: 'DELETE'
+    }).then(response => {
+        expect(response.status).to.eq(204)
+    })
+})

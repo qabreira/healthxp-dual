@@ -77,7 +77,8 @@ module.exports = defineConfig({
     },
     env: {
       url: 'http://localhost:3000',
-      api: 'http://localhost:3333'
+      api: 'http://localhost:3333',
+      helper: 'http://localhost:5000'
     },
     baseUrl: 'http://localhost:3000'
   },
