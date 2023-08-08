@@ -32,6 +32,32 @@ const deleteAndCreateStudent = (req, res) => {
     })
 }
 
+const deleteStudentByEmail = (req, res) => {
+    const studentEmail = req.params.email
+    const query = 'DELETE FROM students WHERE email = $1;'
+
+    pool.query(query, [studentEmail], function (error, result) {
+        if (error) {
+            return res.status(500).json(error)
+        }
+        res.status(204).json()
+    })
+}
+
+const selectStudent = (req, res) => {
+    const studentEmail = req.params.email
+    const query = 'SELECT id FROM students WHERE email = $1;'
+
+    pool.query(query, [studentEmail], function (error, result) {
+        if (error) {
+            return res.status(500).json(error)
+        }
+        res.status(200).json(result.rows[0])
+    })
+}
+
 module.exports = {
-    deleteAndCreateStudent
+    deleteAndCreateStudent,
+    deleteStudentByEmail,
+    selectStudent
 }
