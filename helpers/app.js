@@ -9,10 +9,8 @@ app.get('/', function (req, res) {
     res.json({ message: 'Hello API Helper' })
 })
 
-// REQUISITANDO ESTA ROTA UM ESTUDANTE É DELETADO (CASO EXISTIR)
-// E RECRIADO PARA PREPARAR A PRÉ CONDIÇÃO DE TESTE :)
 app.post('/students', db.deleteAndCreateStudent)
 app.delete('/students/:email', db.deleteStudentByEmail)
-app.get('/students/:email', db.selectStudent)
+app.post('/enrolls', db.insertEnrollByEmail)
 
 app.listen(5000)
