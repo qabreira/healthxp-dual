@@ -12,6 +12,10 @@ const deleteAndCreateStudent = (req, res) => {
 
     const student = req.body
 
+    if (student.name === '' || !student.name) {
+        return res.status(400).json({ message: 'Name is required' })
+    }
+
     const query = `
     WITH add AS (
       INSERT INTO students (name, email, age, weight, feet_tall)
