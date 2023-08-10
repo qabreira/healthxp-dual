@@ -66,10 +66,6 @@ describe('alunos', () => {
             { message: 'A idade máxima para treinar é 90 anos!' }
         ]
 
-        // agesNotAllowed.forEach((student) => {
-        //     cy.task('deleteStudent', student.email)
-        // })
-
         cy.doAdminLogin()
         studentsPage.goToRegister()
 
@@ -85,7 +81,6 @@ describe('alunos', () => {
         const agesAllowed = students.agesAllowed
 
         agesAllowed.forEach((student) => {
-            // cy.task('deleteStudent', student.email)
             cy.deleteStudent(student.email)
         })
 

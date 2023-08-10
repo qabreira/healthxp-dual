@@ -4,24 +4,21 @@
         "email": "jeremy@mail.com",
         "age": "30",
         "weight": "80",
-        "feet_tall": "1.8",
-        "textMessage": "Dados cadastrados com sucesso."
+        "feet_tall": "1.8"
     },
     "duplicateEmail": {
         "name": "Jão Predo",
         "email": "jp@mail.com",
         "age": "44",
         "weight": "60",
-        "feet_tall": "1.5",
-        "textMessage": "O email informado já foi cadastrado!"
+        "feet_tall": "1.5"
     },
     "removeRegister": {
         "name": "Valdir Sem Matrícula",
         "email": "vp@mail.com",
         "age": "52",
         "weight": "100",
-        "feet_tall": "1.85",
-        "textMessage": "Exclusão realizada com sucesso."
+        "feet_tall": "1.85"
     },
     "agesNotAllowed": [
         {

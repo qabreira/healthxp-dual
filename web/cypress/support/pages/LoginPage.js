@@ -7,7 +7,7 @@ class LoginPage {
     }
 
     go() {
-        cy.visit('/').title()
+        cy.visit(Cypress.env('baseUrl')).title()
             .should('eq', 'Health eXperience | Exclusivo para treinamentos na QAx')
     }
 

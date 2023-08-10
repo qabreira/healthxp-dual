@@ -10,7 +10,7 @@ class StudentsPage {
 
     goToRegister() {
         cy.contains('a', 'Cadastrar').click()
-        cy.url().should('eq', `${Cypress.env('url')}/students/new`)
+        cy.url().should('eq', `${Cypress.env('baseUrl')}/students/new`)
     }
 
     fillFormRegister(student) {

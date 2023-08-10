@@ -7,7 +7,7 @@ class Navbar {
     goToEnroll() {
         cy.contains('a', '/matrículas')
             .should('be.visible').click()
-        cy.url().should('eq', `${Cypress.env('url')}/enrollments`)
+        cy.url().should('eq', `${Cypress.env('baseUrl')}/enrollments`)
     }
 }
 

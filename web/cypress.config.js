@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { defineConfig } = require("cypress");
 const { Pool } = require('pg')
 const dbConfig = {
@@ -76,10 +78,9 @@ module.exports = defineConfig({
       })
     },
     env: {
-      url: 'http://localhost:3000',
-      api: 'http://localhost:3333',
-      helper: 'http://localhost:5000'
+      baseUrl: process.env.BASE_URL,
+      api: process.env.API,
+      helper: process.env.API_HELPER
     },
-    baseUrl: 'http://localhost:3000'
   },
 });

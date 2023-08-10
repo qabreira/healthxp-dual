@@ -2,3 +2,5 @@ node_modules
 web/cypress/downloads
 web/cypress/videos
 web/cypress/screenshots
+web/.env
+helpers/.env

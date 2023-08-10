@@ -8,7 +8,7 @@ class EnrollmentsPage {
     }
     goToRegister() {
         cy.contains('a', 'Cadastrar').click()
-        cy.url().should('eq', `${Cypress.env('url')}/enrollments/new`)
+        cy.url().should('eq', `${Cypress.env('baseUrl')}/enrollments/new`)
     }
 
     selectItem(item, value) {

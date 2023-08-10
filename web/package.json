@@ -16,5 +16,8 @@
   "devDependencies": {
     "cypress": "^12.16.0",
     "pg": "^8.11.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
   }
 }
