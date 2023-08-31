@@ -12,28 +12,29 @@ const pool = new Pool({
 const deleteAndCreateStudent = (req, res) => {
 
     const student = req.body
-
-    if (student.name === '' || !student.name) {
-        return res.status(400).json({ message: 'Name is required' })
-    }
-
-    const query = `
-    WITH add AS (
-      INSERT INTO students (name, email, age, weight, feet_tall)
-      VALUES ($1, $2, $3, $4, $5)
-    )
-    DELETE FROM students WHERE email = $2;
+    const queryDelete = `
+        DELETE FROM students WHERE email = $1;
     `
+    const queryInsert = `
+        INSERT INTO students (name, email, age, weight, feet_tall)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING ID as student_id;
+    `
+
     const values = [
         student.name, student.email, student.age, student.weight, student.feet_tall
     ]
 
-    pool.query(query, values, function (error, result) {
+    pool.query(queryDelete, [student.email], function (error, result) {
         if (error) {
-            // COM O RETURN, CASO OCORRER UM ERRO A EXECUÇÃO É "ABORTADA" NESTA LINHA
             return res.status(500).json(error)
         }
-        res.status(201).json(result)
+        pool.query(queryInsert, values, function (error, result) {
+            if (error) {
+                return res.status(500).json(error)
+            }
+            res.status(201).json({ student_id: result.rows[0].student_id })
+        })
     })
 }
 
@@ -73,8 +74,20 @@ const insertEnrollByEmail = (req, res) => {
     })
 }
 
+const deleteAllHelpOrders = (req, res) => {
+    const query = 'DELETE FROM "help_orders"'
+
+    pool.query(query, function (error, result) {
+        if (error) {
+            return res.status(500).json(error)
+        }
+        res.status(204).end()
+    })
+}
+
 module.exports = {
     deleteAndCreateStudent,
     deleteStudentByEmail,
-    insertEnrollByEmail
+    insertEnrollByEmail,
+    deleteAllHelpOrders
 }

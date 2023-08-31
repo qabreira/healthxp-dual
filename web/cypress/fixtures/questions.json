@@ -1,0 +1,32 @@
+{
+    "create": {
+        "student": {
+            "name": "Tonho Pomodoro",
+            "email": "tomoro@mail.com",
+            "age": "62",
+            "weight": "80",
+            "feet_tall": "1.8"
+        },
+        "plan": {
+            "id": 2,
+            "name": "Premium",
+            "price": 99.99
+        },
+        "question": "posso comer macarrão durante as abdominais?"
+    },
+    "response": {
+        "student": {
+            "name": "Pericles Picles",
+            "email": "peripicles@mail.com",
+            "age": "62",
+            "weight": "80",
+            "feet_tall": "1.8"
+        },
+        "plan": {
+            "id": 2,
+            "name": "Premium",
+            "price": 99.99
+        },
+        "question": "posso comer picles antes do treino?"
+    }
+}

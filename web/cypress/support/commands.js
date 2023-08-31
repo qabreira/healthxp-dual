@@ -9,6 +9,16 @@ Cypress.Commands.add('doAdminLogin', () => {
     studentsPage.navbar.loggedInUser(user.name)
 })
 
+Cypress.Commands.add('createQuestion', (question) => {
+    cy.request({
+        url: `${Cypress.env('api')}/students/${Cypress.env('studentId')}/help-orders`,
+        method: 'POST',
+        body: { question }
+    }).then(response => {
+        expect(response.status).to.eq(201)
+    })
+})
+
 Cypress.Commands.add('createEnroll', (dataTest) => {
     cy.request({
         url: `${Cypress.env('helper')}/enrolls`,
@@ -30,12 +40,23 @@ Cypress.Commands.add('resetStudent', (student) => {
         body: student
     }).then(response => {
         expect(response.status).to.eq(201)
+        cy.log(response.body.student_id)
+        Cypress.env('studentId', response.body.student_id)
     })
 })
 
 Cypress.Commands.add('deleteStudent', (studentEmail) => {
     cy.request({
         url: `${Cypress.env('helper')}/students/${studentEmail}`,
+        method: 'DELETE'
+    }).then(response => {
+        expect(response.status).to.eq(204)
+    })
+})
+
+Cypress.Commands.add('cleanHelpOrders', () => {
+    cy.request({
+        url: `${Cypress.env('helper')}/clean-help-orders`,
         method: 'DELETE'
     }).then(response => {
         expect(response.status).to.eq(204)

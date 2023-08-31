@@ -14,7 +14,7 @@
   "author": "Pablo Cabreira",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^12.16.0",
+    "cypress": "^13.0.0",
     "pg": "^8.11.1"
   },
   "dependencies": {

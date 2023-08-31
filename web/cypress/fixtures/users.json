@@ -35,5 +35,10 @@
         "email": "admin@healthxp.com",
         "password": "",
         "textMessage": "Os campos email e senha são obrigatórios."
+    },
+    "loginAdmin": {
+        "email": "admin@healthxp.com",
+        "password": "xperience",
+        "name": "Admin"
     }
 }

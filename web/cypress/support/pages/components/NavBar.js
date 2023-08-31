@@ -9,6 +9,16 @@ class Navbar {
             .should('be.visible').click()
         cy.url().should('eq', `${Cypress.env('baseUrl')}/enrollments`)
     }
+
+    checkNotifications(question) {
+        cy.get('button').click()
+        cy.contains('div', question).should('be.visible')
+    }
+
+    openQuestion(question) {
+        cy.get('button').click()
+        cy.contains('div', question).should('be.visible').click()
+    }
 }
 
 export default new Navbar()

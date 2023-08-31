@@ -4,3 +4,4 @@ web/cypress/videos
 web/cypress/screenshots
 web/.env
 helpers/.env
+mobile/app

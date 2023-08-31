@@ -26,6 +26,7 @@ const studentSchema = Joi.object({
 app.post('/students', validator.body(studentSchema), db.deleteAndCreateStudent)
 app.delete('/students/:email', db.deleteStudentByEmail)
 app.post('/enrolls', db.insertEnrollByEmail)
+app.delete('/clean-help-orders', db.deleteAllHelpOrders)
 
 app.use((err, req, res, next) => {
     if (err && err.error && err.error.isJoi) {
